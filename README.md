@@ -7,14 +7,10 @@ Summary: This program reads satellite telemetry data from an input file, detects
 alerts for a satellite, and suppresses redundant alerts within a 5 minute sliding window.
 
 
-Build:
-
-mvn clean package
+Build: mvn clean package
 
 
-Run:
-
-java -jar target/paging-mission-control-1.0.0.jar <path-to-input.txt>
+Run: java -jar target/paging-mission-control-1.0.0.jar <path-to-input.txt>
 
 
 Design:
@@ -32,9 +28,7 @@ Assumptions:
 - Suppression policy A: after one alert for a key, suppress until the window clears
 
 
-Tests:
-
-mvn test
+Tests: mvn test
 
 
 Author: Allison Harvel
