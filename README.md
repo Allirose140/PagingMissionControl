@@ -13,7 +13,7 @@ target/paging-mission-control-1.0.0.jar
 ## Run
 java -jar target/paging-mission-control-1.0.0.jar data/sample.txt
 
-Replace `data/sample.txt` with your own input file path.
+Replace "data/sample.txt" with your own input file path.
 
 ### Input Format
 Each line of the input file represents one telemetry record, for example:
