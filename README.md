@@ -24,7 +24,7 @@ Each line of the input file represents one telemetry record, for example:
 - Remaining values: telemetry readings
 
 ### Output
-JSON alerts are printed to standard output (stdout), e.g.:
+JSON alerts are printed to standard output, e.g:
 {"sat":"SAT-001","alert":"threshold violation","timestamp":"2025-10-12T08:15:30Z"}
 
 ## Design
