@@ -4,6 +4,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.time.Instant;
 
+
+// Unit tests for the SlidingWindowEngine class.
+// This class verifies that alert suppression logic works correctly within the time window
+// The helper methods (batt and tstat) generate telemetry records for different components
+// to simulate satellite sensor data in the test scenarios
 public class SlidingWindowEngineTest {
 
     private TelemetryRecord batt(Instant t, int sat, int redHigh, int yHi, int yLo, int redLow, int raw) {
@@ -12,7 +17,7 @@ public class SlidingWindowEngineTest {
     private TelemetryRecord tstat(Instant t, int sat, int redHigh, int yHi, int yLo, int redLow, int raw) {
         return new TelemetryRecord(t, sat, redHigh, yHi, yLo, redLow, raw, "TSTAT");
     }
-
+    // ensures that an alert triggers if 3 low readings happen within 5 minutes
     @Test
     void triggersOnThirdBattLowWithin5Min() {
         SlidingWindowEngine eng = new SlidingWindowEngine();
@@ -27,6 +32,7 @@ public class SlidingWindowEngineTest {
         assertEquals(100, a.satelliteId);
     }
 
+    // ensures no alert if those readings are too far apart
     @Test
     void noAlertWhenSpreadBeyond5Min() {
         SlidingWindowEngine eng = new SlidingWindowEngine();
@@ -38,6 +44,7 @@ public class SlidingWindowEngineTest {
         assertNull(a);
     }
 
+        // tests that exactly 5 minutes still counts as “within window.”
     @Test
     void boundaryInclusiveAtFiveMinutes() {
         SlidingWindowEngine eng = new SlidingWindowEngine();

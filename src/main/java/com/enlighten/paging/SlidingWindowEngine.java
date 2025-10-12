@@ -10,10 +10,10 @@ import java.util.Map;
 import java.util.Set;
 
 
- // Keeps a 5 minute sliding window of violation timestamps for each (satelliteId, component).
- // Emits an Alert on the 3rd violation within the window.
+ // Keeps a 5 minute sliding window of violation timestamps for each (satelliteId, component)
+ // Emits an Alert on the 3rd violation within the window
  // Suppression policy A: after emitting, suppress further alerts for that key until
- // the window fully clears (i.e., no timestamps left in the deque).
+ // the window fully clears (i.e: no timestamps left in the deque)
 
 public class SlidingWindowEngine {
 
@@ -26,7 +26,7 @@ public class SlidingWindowEngine {
     private final Set<String> locked = new HashSet<>();
 
      // Process one telemetry record. Returns an Alert when the 3rd violation
-     // is observed within a 5-minute inclusive window; otherwise returns null.
+     // is observed within a 5 minute inclusive window; otherwise returns null
 
     public Alert process(TelemetryRecord r) {
         // Ignore non-violations fast.
@@ -66,7 +66,7 @@ public class SlidingWindowEngine {
     private void evictOld(Deque<Instant> q, Instant now) {
         while (!q.isEmpty()) {
             Instant head = q.peekFirst();
-            // Inclusive 5-minute window: keep events where head >= now - 5min
+            // Inclusive 5 minute window: keep events where head >= now - 5min
             if (head.isBefore(now.minus(WINDOW))) {
                 q.removeFirst();
             } else {

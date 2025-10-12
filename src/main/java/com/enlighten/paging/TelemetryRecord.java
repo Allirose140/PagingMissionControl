@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class TelemetryRecord {
 
-    // ----- parsed fields (immutable) -----
+    // parsed fields
     public final Instant timestamp;
     public final int satelliteId;
     public final int redHigh;
@@ -37,13 +37,13 @@ public class TelemetryRecord {
         this.component   = component;
     }
 
-    /**
-     * Parse one pipe-delimited line into a TelemetryRecord.
-     * Handles inline // comments and blank lines.
-     *
-     * @return TelemetryRecord, or null if the line is blank after stripping comments.
-     * @throws IllegalArgumentException if the non-blank line is malformed.
-     */
+
+     // Parse one pipe delimited line into a TelemetryRecord
+     // Handles inline // comments and blank lines
+
+     // @return TelemetryRecord, or null if the line is blank after stripping comments
+     // @throws IllegalArgumentException if the non-blank line is malformed
+
     public static TelemetryRecord fromLine(String line) {
         if (line == null) return null;
 
@@ -76,24 +76,24 @@ public class TelemetryRecord {
         return new TelemetryRecord(ts, satId, rHigh, yHigh, yLow, rLow, raw, comp);
     }
 
-    // ----- Violation helpers -----
+    // Violation helpers
 
     public boolean isBattViolation() {
-        // Battery alert when voltage dangerously low
+        // Battery alert when voltage is dangerously low
         return "BATT".equals(component) && rawValue < redLow;
     }
 
     public boolean isTstatViolation() {
-        // Thermostat alert when temperature dangerously high
+        // Thermostat alert when temperature is dangerously high
         return "TSTAT".equals(component) && rawValue > redHigh;
     }
 
-    /** Any violation? (used by the sliding window engine) */
+    // Tracks if there is any violation? (used by the sliding window engine)
     public boolean isViolation() {
         return isBattViolation() || isTstatViolation();
     }
 
-    /** Map the violation to the required severity string. */
+    // Map the violation to the required severity string
     public String violationSeverity() {
         if (isBattViolation())  return "RED LOW";
         if (isTstatViolation()) return "RED HIGH";

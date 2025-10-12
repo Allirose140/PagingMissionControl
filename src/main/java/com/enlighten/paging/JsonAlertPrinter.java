@@ -3,7 +3,7 @@ package com.enlighten.paging;
 public class JsonAlertPrinter implements AlertPrinter {
     @Override
     public void print(Alert a) {
-        // Minimal, valid JSON; timestamp uses ISO-8601 via Instant.toString()
+        // Minimal & valid JSON; timestamp uses ISO-8601 via Instant.toString()
         String json =
                 "{\"satelliteId\":" + a.satelliteId +
                         ",\"severity\":\"" + a.severity + "\"" +
