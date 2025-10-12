@@ -1,36 +1,46 @@
-Paging Mission Control:
+# Paging Mission Control
+Java implementation of the Enlighten Programming Challenge 2025.
 
+## Summary
+This program reads satellite telemetry data from an input text file, detects repeated alerts for a satellite, and suppresses redundant alerts within a 5-minute sliding window. It processes telemetry efficiently in one pass using a per-key sliding window.
 
-Java implementation of the Enlighten Programming Challenge 2025
+## Build
+mvn clean package
 
-Summary: This program reads satellite telemetry data from an input file, detects repeated
-alerts for a satellite, and suppresses redundant alerts within a 5 minute sliding window.
+This creates a runnable JAR under:
+target/paging-mission-control-1.0.0.jar
 
+## Run
+java -jar target/paging-mission-control-1.0.0.jar data/sample.txt
 
-Build: mvn clean package
+Replace `data/sample.txt` with your own input file path.
 
+### Input Format
+Each line of the input file represents one telemetry record, for example:
+2025-10-12T08:15:30Z SAT-001 100 50 40 25 20
 
-Run: java -jar target/paging-mission-control-1.0.0.jar <path-to-input.txt>
+- First column: ISO timestamp
+- Second: satellite identifier
+- Remaining values: telemetry readings
 
+### Output
+JSON alerts are printed to standard output (stdout), e.g.:
+{"sat":"SAT-001","alert":"threshold violation","timestamp":"2025-10-12T08:15:30Z"}
 
-Design:
+## Design
+- Single-pass O(n) processing
+- Per-key Deque<Instant> sliding window
+- Alert triggered on third violation within window
+- 5-minute inclusive window for suppression
 
-- One pass O(n) processing
-- Per key Deque<Instant> sliding window
-- Alert on 3rd violation
-- 5 minute inclusive window for suppression
-
-
-Assumptions:
-
+## Assumptions
 - Input is well-formed (one telemetry record per line)
-- Outputs one JSON alert per line to stdout
-- Suppression policy A: after one alert for a key, suppress until the window clears
+- Output is printed to console (not written to file)
+- After one alert for a key, duplicates within the current window are suppressed
 
+## Tests
+mvn test
 
-Tests: mvn test
-
-
-Author: Allison Harvel
-
+## Author
+Allison Harvel  
 Challenge: Enlighten Programming Challenge 2025
