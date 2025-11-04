@@ -25,6 +25,7 @@ public class SlidingWindowEngine {
     // Keys currently “locked” because we just emitted an alert; unlock when their window clears
     private final Set<String> locked = new HashSet<>();
 
+
      // Process one telemetry record. Returns an Alert when the 3rd violation
      // is observed within a 5 minute inclusive window; otherwise returns null
 
