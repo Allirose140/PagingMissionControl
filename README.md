@@ -42,4 +42,3 @@ mvn test
 
 ## Author
 Allison Harvel  
-Challenge: Enlighten Programming Challenge 2025
