@@ -1,5 +1,4 @@
 # Paging Mission Control
-Java implementation of the Enlighten Programming Challenge 2025
 
 ## Summary
 This program reads satellite telemetry data from an input text file, detects repeated alerts for a satellite, and suppresses redundant alerts within a 5 minute sliding window. It processes telemetry efficiently in one pass using a per key sliding window.
